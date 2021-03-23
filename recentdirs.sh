@@ -4,8 +4,13 @@ set -o errexit
 set -o pipefail
 
 FZFZ_RECENT_DIRS_TOOL=${FZFZ_RECENT_DIRS_TOOL:="z"}
+FZFZ_RECENT_DIRS_TOOL_CMD="${FZFZ_RECENT_DIRS_TOOL_CMD}"
 
 SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+if [[ "$FZFZ_RECENT_DIRS_TOOL_CMD" ]]; then
+  $FZFZ_RECENT_DIRS_TOOL_CMD 2>&1 && exit 0 || exit 0
+fi
 
 if [[ $FZFZ_RECENT_DIRS_TOOL == "z" ]]; then
     if [ ! -f "$SCRIPT_PATH/z.sh" ]; then
